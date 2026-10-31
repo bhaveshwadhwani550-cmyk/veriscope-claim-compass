@@ -41,6 +41,6 @@ describe("normalizeAnalysis provenance rules", () => {
       { ...base, dimensions: [{ name: "Gender", coverage: "high", claim_ids: ["C7"], note: "" }] },
       ["SRC-001"],
     );
-    expect(out.dimensions[0].coverage).toBe("none");
+    expect(out.dimensions[0]?.coverage).toBe("none");
   });
 });

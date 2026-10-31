@@ -32,7 +32,7 @@ function NewInvestigation() {
 
   async function create(withDemo: boolean) {
     const t = withDemo ? DEMO_TOPIC : topic.trim();
-    if (!t) return toast.error("Enter a research topic first");
+    if (!t) { toast.error("Enter a research topic first"); return; }
     setBusy(true);
     const { data, error } = await supabase
       .from("investigations")
@@ -41,7 +41,7 @@ function NewInvestigation() {
       .single();
     if (error || !data) {
       setBusy(false);
-      return toast.error(error?.message ?? "Could not create investigation");
+      { toast.error(error?.message ?? "Could not create investigation"); return; }
     }
     if (withDemo) {
       const { error: e2 } = await supabase.from("sources").insert(

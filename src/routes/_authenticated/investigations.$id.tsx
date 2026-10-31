@@ -163,13 +163,13 @@ function AddSourceDialog({ investigationId, codes, onAdded }: { investigationId:
   const [busy, setBusy] = useState(false);
 
   async function onFile(file: File) {
-    if (!/\.(txt|csv|md)$/i.test(file.name)) return toast.error("Only .txt, .csv and .md files are supported for now — paste the text from PDFs or Word files.");
+    if (!/\.(txt|csv|md)$/i.test(file.name)) { toast.error("Only .txt, .csv and .md files are supported for now — paste the text from PDFs or Word files."); return; }
     const text = await file.text();
     setF((p) => ({ ...p, content: text, title: p.title || file.name.replace(/\.\w+$/, "") }));
   }
 
   async function save() {
-    if (!f.title.trim() || f.content.trim().length < 40) return toast.error("Add a title and at least a paragraph of source text.");
+    if (!f.title.trim() || f.content.trim().length < 40) { toast.error("Add a title and at least a paragraph of source text."); return; }
     setBusy(true);
     const { error } = await supabase.from("sources").insert({
       investigation_id: investigationId,
@@ -182,7 +182,7 @@ function AddSourceDialog({ investigationId, codes, onAdded }: { investigationId:
       content: f.content.trim(),
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setF({ title: "", author: "", published_at: "", source_type: "article", url: "", content: "" });
     setOpen(false);
     onAdded();

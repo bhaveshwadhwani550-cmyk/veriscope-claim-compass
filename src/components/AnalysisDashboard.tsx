@@ -214,7 +214,7 @@ function CoverageRadar({ analysis }: { analysis: Analysis }) {
   );
 }
 
-function ClaimCard({ claim, source, onOpen, label, compact }: { claim: Claim; source?: SourceRow; onOpen: (s: SourceRow) => void; label?: string; compact?: boolean }) {
+function ClaimCard({ claim, source, onOpen, label, compact }: { claim: Claim; source?: SourceRow | undefined; onOpen: (s: SourceRow) => void; label?: string; compact?: boolean }) {
   return (
     <div className={`rounded-2xl border bg-card p-4 ${compact ? "" : "shadow-card"}`}>
       <div className="flex flex-wrap items-center gap-2">

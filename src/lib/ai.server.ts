@@ -30,7 +30,7 @@ export async function runAnalysis(
   sources: SourceInput[],
   signal?: AbortSignal,
 ): Promise<RawAnalysis> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) throw new Error("AI is not configured for this project.");
 
   const provider = createOpenAI({
@@ -56,7 +56,7 @@ export async function runAnalysis(
       },
     ],
     output: Output.object({ schema: analysisSchema }),
-    abortSignal: signal,
+    ...(signal ? { abortSignal: signal } : {}),
     providerOptions: {
       openai: {
         forceReasoning: true,

@@ -29,7 +29,7 @@ function Dashboard() {
     { label: "Potential conflicts", value: totals.conflicts, icon: GitCompareArrows, tone: "bg-destructive-soft text-destructive" },
     { label: "Information gaps", value: totals.gaps, icon: SearchX, tone: "bg-warning-soft text-warning" },
   ];
-  const first = (user.user_metadata?.full_name as string | undefined)?.split(" ")[0];
+  const first = (user.user_metadata?.["full_name"] as string | undefined)?.split(" ")[0];
 
   return (
     <div>

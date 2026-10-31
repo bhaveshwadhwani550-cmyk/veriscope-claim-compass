@@ -30,7 +30,7 @@ const tones: Record<string, string> = {
 
 export function StatusBadge({ status, label, className }: { status: string; label?: string; className?: string }) {
   return (
-    <span className={cn("inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-semibold capitalize", tones[status] ?? tones.draft, className)}>
+    <span className={cn("inline-flex shrink-0 items-center rounded-full px-2 py-0.5 text-xs font-semibold capitalize", tones[status] ?? tones["draft"], className)}>
       {label ?? status.replace(/_/g, " ")}
     </span>
   );

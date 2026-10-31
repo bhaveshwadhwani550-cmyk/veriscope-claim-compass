@@ -60,7 +60,7 @@ function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
       <div className="mt-auto rounded-xl border border-sidebar-border p-3">
-        <p className="truncate text-sm font-semibold text-sidebar-accent-foreground">{user.user_metadata?.full_name || user.email}</p>
+        <p className="truncate text-sm font-semibold text-sidebar-accent-foreground">{user.user_metadata?.["full_name"] || user.email}</p>
         <p className="truncate text-xs">{user.email}</p>
         <button onClick={signOut} className="mt-3 flex items-center gap-2 text-xs font-semibold hover:text-sidebar-accent-foreground">
           <LogOut className="h-3.5 w-3.5" /> Sign out
