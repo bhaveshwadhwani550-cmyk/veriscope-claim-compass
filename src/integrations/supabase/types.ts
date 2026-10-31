@@ -14,7 +14,98 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      investigations: {
+        Row: {
+          analysis: Json | null
+          created_at: string
+          description: string | null
+          error: string | null
+          id: string
+          status: string
+          topic: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          analysis?: Json | null
+          created_at?: string
+          description?: string | null
+          error?: string | null
+          id?: string
+          status?: string
+          topic: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          analysis?: Json | null
+          created_at?: string
+          description?: string | null
+          error?: string | null
+          id?: string
+          status?: string
+          topic?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      sources: {
+        Row: {
+          author: string | null
+          code: string
+          content: string
+          created_at: string
+          id: string
+          investigation_id: string
+          is_demo: boolean
+          published_at: string | null
+          source_type: string
+          status: string
+          title: string
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          author?: string | null
+          code: string
+          content: string
+          created_at?: string
+          id?: string
+          investigation_id: string
+          is_demo?: boolean
+          published_at?: string | null
+          source_type?: string
+          status?: string
+          title: string
+          url?: string | null
+          user_id?: string
+        }
+        Update: {
+          author?: string | null
+          code?: string
+          content?: string
+          created_at?: string
+          id?: string
+          investigation_id?: string
+          is_demo?: boolean
+          published_at?: string | null
+          source_type?: string
+          status?: string
+          title?: string
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sources_investigation_id_fkey"
+            columns: ["investigation_id"]
+            isOneToOne: false
+            referencedRelation: "investigations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
