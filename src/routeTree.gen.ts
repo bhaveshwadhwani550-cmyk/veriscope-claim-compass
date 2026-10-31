@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedInvestigationsIndexRouteImport } from './routes/_authenticated/investigations.index'
+import { Route as AuthenticatedInvestigationsIdRouteImport } from './routes/_authenticated/investigations.$id'
 import { Route as AuthenticatedInvestigationsNewRouteImport } from './routes/_authenticated/investigations.new'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,12 @@ const AuthenticatedInvestigationsIndexRoute =
     path: '/investigations/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedInvestigationsIdRoute =
+  AuthenticatedInvestigationsIdRouteImport.update({
+    id: '/investigations/$id',
+    path: '/investigations/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedInvestigationsNewRoute =
   AuthenticatedInvestigationsNewRouteImport.update({
     id: '/investigations/new',
@@ -59,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/investigations/$id': typeof AuthenticatedInvestigationsIdRoute
   '/investigations/new': typeof AuthenticatedInvestigationsNewRoute
   '/investigations/': typeof AuthenticatedInvestigationsIndexRoute
 }
@@ -67,6 +75,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/investigations/$id': typeof AuthenticatedInvestigationsIdRoute
   '/investigations/new': typeof AuthenticatedInvestigationsNewRoute
   '/investigations': typeof AuthenticatedInvestigationsIndexRoute
 }
@@ -77,6 +86,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/investigations/$id': typeof AuthenticatedInvestigationsIdRoute
   '/_authenticated/investigations/new': typeof AuthenticatedInvestigationsNewRoute
   '/_authenticated/investigations/': typeof AuthenticatedInvestigationsIndexRoute
 }
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/dashboard'
+    | '/investigations/$id'
     | '/investigations/new'
     | '/investigations/'
   fileRoutesByTo: FileRoutesByTo
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/dashboard'
+    | '/investigations/$id'
     | '/investigations/new'
     | '/investigations'
   id:
@@ -104,6 +116,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/reset-password'
     | '/_authenticated/dashboard'
+    | '/_authenticated/investigations/$id'
     | '/_authenticated/investigations/new'
     | '/_authenticated/investigations/'
   fileRoutesById: FileRoutesById
@@ -159,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedInvestigationsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/investigations/$id': {
+      id: '/_authenticated/investigations/$id'
+      path: '/investigations/$id'
+      fullPath: '/investigations/$id'
+      preLoaderRoute: typeof AuthenticatedInvestigationsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/investigations/new': {
       id: '/_authenticated/investigations/new'
       path: '/investigations/new'
@@ -171,12 +191,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedInvestigationsIdRoute: typeof AuthenticatedInvestigationsIdRoute
   AuthenticatedInvestigationsNewRoute: typeof AuthenticatedInvestigationsNewRoute
   AuthenticatedInvestigationsIndexRoute: typeof AuthenticatedInvestigationsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedInvestigationsIdRoute: AuthenticatedInvestigationsIdRoute,
   AuthenticatedInvestigationsNewRoute: AuthenticatedInvestigationsNewRoute,
   AuthenticatedInvestigationsIndexRoute: AuthenticatedInvestigationsIndexRoute,
 }
